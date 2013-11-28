@@ -24,6 +24,7 @@ function () {
 </pre>
 </div>
 
+https://github.com/angular/angular.js/blob/6c59e770084912d2345e7f83f983092a2d305ae3/src/Angular.js#L670
 <div class="highlight highlight-js">
 <pre>
 /**
@@ -63,7 +64,7 @@ function equals(o1, o2) {
       if (isArray(o1)) {
         if (!isArray(o2)) return false;
         if ((length = o1.length) == o2.length) {
-          for(key=0; key<length; key++) {
+          for(key=0; key &lt; length; key++) {
             if (!equals(o1[key], o2[key])) return false;
           }
           return true;
