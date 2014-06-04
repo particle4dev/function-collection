@@ -96,6 +96,8 @@ function equals(o1, o2) {
 </pre>
 </div>
 
+http://jsfiddle.net/SpYk3/e4Ank/
+
 <div class="highlight highlight-js">
 <pre>
 function matchUrl(c) {
