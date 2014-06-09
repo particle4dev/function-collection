@@ -1,3 +1,7 @@
+/**
+ * How to use ?
+ */
+
 var root = this;
 (function(){
     var Pipeline = function () {
