@@ -1,3 +1,6 @@
+/**
+ * How to use ?
+ */
 function () {
     var HEX_DIGITS = "0123456789abcdef";
     var s = [];
