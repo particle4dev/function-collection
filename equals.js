@@ -1,5 +1,9 @@
 //https://github.com/angular/angular.js/blob/6c59e770084912d2345e7f83f983092a2d305ae3/src/Angular.js#L670
 /**
+ * How to use ?
+ */
+
+/**
  * @ngdoc function
  * @name angular.equals
  * @function
