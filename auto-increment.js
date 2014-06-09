@@ -1,4 +1,9 @@
 /**
+ * How to use ?
+ */
+
+
+/**
  *
  */
 var AutoIncrement = (function(){
@@ -32,7 +37,3 @@ var AutoIncrement = (function(){
     var self = this;
     self.AutoIncrement = AutoIncrement;
 }).apply(APP.namespace('helpers'));
-
-/**
- * How to use ?
- */
