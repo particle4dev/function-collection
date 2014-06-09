@@ -1,4 +1,8 @@
 //http://jsfiddle.net/SpYk3/e4Ank/
+/**
+ * How to use ?
+ */
+
 function matchUrl(c) {
     var b = void 0,
         d = "url,,scheme,,authority,path,,query,,fragment".split(","),
