@@ -1,5 +1,28 @@
 /**
- * How to use ?
+
+var a = new Pipeline();
+a.push(function(b){
+    console.log(b);
+}, 'b');
+a.push(function(c){
+    console.log(c);
+}, 'c');
+a.push(function(d){
+    console.log(d);
+}, 'd');
+a.push(function(e){
+    console.log(e);
+}, 'e');
+a.requireFlush(1); // b
+a.requireFlush(1); // c
+a.requireFlush();  // d, e
+
+OR 
+
+a.sequenceFlush({
+    duration: 500 //ms
+});
+ 
  */
 
 var root = this;
@@ -41,6 +64,7 @@ var root = this;
                 if(_.isFunction(tmp))
                     tmp();
             }
+
             //reset
             //_pipeline = [];
             length = 0;
@@ -67,12 +91,36 @@ var root = this;
         self.requireFlush = function (num) {
             if (! willFlush) {
                 var args = Array.prototype.slice.call(arguments, 0);
-                var func = _.bind.apply(self, [self.flushing, null].concat(args));
-                Meteor.setTimeout(func, 0);
                 willFlush = true;
+                setTimeout(function () {
+                    var func = _.bind.apply(self, [self.flushing, null].concat(args));
+                    func();
+                }, 0);
             }
             return this;
-        }
+        };
+        self.reset = function () {
+            _pipeline = [];
+            length = 0;
+            willFlush = false;
+            inFlush = false;
+            return this;
+        };
+        self.sequenceFlush = function (option) {
+            if(self.isSequenceFlush)
+                return;
+            self._sequenceFlush(option);
+        };
+        self._sequenceFlush = function (option) {
+            self.isSequenceFlush = true;
+            self.requireFlush(1);
+            setTimeout(function () {
+                if(_pipeline.length > 0)
+                    self._sequenceFlush(option);
+                else
+                    self.isSequenceFlush = false;
+            }, option.duration);
+        };
     };
     this.Pipeline = Pipeline;
 }).apply(root);
