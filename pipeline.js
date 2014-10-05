@@ -25,9 +25,8 @@ a.sequenceFlush({
  
  */
 
-var root = this;
-(function(){
-    var Pipeline = function () {
+Pipeline = (function(){
+    return function () {
         var self = this;
         /**
          * Pipeline
@@ -121,6 +120,8 @@ var root = this;
                     self.isSequenceFlush = false;
             }, option.duration);
         };
+        self.getLength = function () {
+            return _pipeline.length;
+        };
     };
-    this.Pipeline = Pipeline;
-}).apply(root);
+})();
