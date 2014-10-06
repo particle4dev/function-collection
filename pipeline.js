@@ -24,7 +24,6 @@ a.sequenceFlush({
 });
  
  */
-
 Pipeline = (function(){
     return function () {
         var self = this;
@@ -34,7 +33,7 @@ Pipeline = (function(){
          *
          */
         var _pipeline = [];
-        var length;
+        var length = 0;
         /**
          * @description It is true if we are in flushing function now
          * @type {boolean}
@@ -87,14 +86,15 @@ Pipeline = (function(){
         self.isInFlush = function(){
             return inFlush;
         };
-        self.requireFlush = function (num) {
+        self.requireFlush = function (num, second) {
             if (! willFlush) {
                 var args = Array.prototype.slice.call(arguments, 0);
                 willFlush = true;
+                second = _.isUndefined(second) ? 0 : second;
                 setTimeout(function () {
                     var func = _.bind.apply(self, [self.flushing, null].concat(args));
                     func();
-                }, 0);
+                }, second);
             }
             return this;
         };
