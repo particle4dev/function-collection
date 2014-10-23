@@ -1,4 +1,5 @@
-Register = (function () { 
+Register = (function () {
+
     return function () {
         var list = {}, arr = [];
         this.set = function (name, obj) {
@@ -21,5 +22,24 @@ Register = (function () {
         this.forEach = function (func) {
             _.each(list, func);
         };
+        this.remove = function (arg) {
+            if(_.isString(arg)) {
+                arr = _.without(arr, list[arg]);
+                list[arg] = null;
+                delete list[arg];
+            }
+            else if(_.isObject(arg)) {
+                list = _.omit(list, function(value, key, object) {
+                    return value === arg;
+                });
+                arr = _.without(arr, arg);
+            }
+            else if(_.isNumber(arg)) {
+                list = _.omit(list, function(value, key, object) {
+                    return value === arr[arg];
+                });
+                arr = _.without(arr, arr[arg]);
+            }
+        }
     };
 })();
