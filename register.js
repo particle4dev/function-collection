@@ -35,6 +35,8 @@ Register = (function () {
                 arr = _.without(arr, arg);
             }
             else if(_.isNumber(arg)) {
+                if(this.length <= arg)
+                    return;
                 list = _.omit(list, function(value, key, object) {
                     return value === arr[arg];
                 });
