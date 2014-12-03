@@ -21,7 +21,7 @@ var LoopJob = (function(){
          **/
         var self = this;
         var delay = (d === null) ? 1000 : d;
-        var object = (o === null) ? null : o;   
+        var object = (o === null) ? {} : o;   
         var todo = t,
         start = 0, end = 2*delay,
         run = true;
@@ -71,9 +71,9 @@ var LoopJob = (function(){
         var remind = function(func, args){
             if(run === true){
                 start = getTime();
-                if(object == null)
-                    func.apply(func, args);
-                else
+                // if(object == null)
+                //     func.apply(func, args);
+                // else
                     func.apply(object, args);
                 var callback = args[args.length-1];
                 if(typeof callback == 'function')
@@ -127,23 +127,29 @@ var LoopJob = (function(){
          **/
         this.getState = function(){
             return run;
-        }
+        };
+
+        object.cancel = this.cancel.bind(this);
     };
     return f;  
 })();
 
 console.log( "Loop Object" );
+var i = 0;
 var obj = {
     firstName:'Steve',
     lastName :'Hoang',
     getInformation: function(){
-        console.log("My name is " + this.firstName + " " + this.lastName);
+        console.log(i + " My name is " + this.firstName + " " + this.lastName);
+        if(i == 9)
+            this.cancel();
+        i++;
     }
 };
 var a = new LoopJob(2000, obj.getInformation, obj);
 a.setup(function(){
     console.log( 'do callback' );
 });
-var id = setTimeout(function(){
-    a.cancel();
-}, 9000);
+// var id = setTimeout(function(){
+//     a.cancel();
+// }, 9000);
