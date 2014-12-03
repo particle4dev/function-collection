@@ -133,3 +133,23 @@ LoopJob = (function(){
     };
     return f;  
 })();
+
+console.log( "Loop Object" );
+var i = 0;
+var obj = {
+    firstName:'Steve',
+    lastName :'Hoang',
+    getInformation: function(){
+        console.log(i + " My name is " + this.firstName + " " + this.lastName);
+        if(i == 9)
+            this.cancel();
+        i++;
+    }
+};
+var a = new LoopJob(2000, obj.getInformation, obj);
+a.setup(function(){
+    console.log( 'do callback' );
+});
+// var id = setTimeout(function(){
+//     a.cancel();
+// }, 9000);
