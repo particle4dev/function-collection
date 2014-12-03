@@ -2,7 +2,7 @@ var impose = function(object, func, args){
     return func.apply(object, args);
 };
  
-var LoopJob = (function(){
+LoopJob = (function(){
     var root = (typeof window !== 'undefined') ? window : global; 
     /**
      * Define class 
@@ -21,7 +21,7 @@ var LoopJob = (function(){
          **/
         var self = this;
         var delay = (d === null) ? 1000 : d;
-        var object = (o === null) ? {} : o;   
+        var object = (o === null || o === undefined) ? {} : o;   
         var todo = t,
         start = 0, end = 2*delay,
         run = true;
@@ -133,23 +133,3 @@ var LoopJob = (function(){
     };
     return f;  
 })();
-
-console.log( "Loop Object" );
-var i = 0;
-var obj = {
-    firstName:'Steve',
-    lastName :'Hoang',
-    getInformation: function(){
-        console.log(i + " My name is " + this.firstName + " " + this.lastName);
-        if(i == 9)
-            this.cancel();
-        i++;
-    }
-};
-var a = new LoopJob(2000, obj.getInformation, obj);
-a.setup(function(){
-    console.log( 'do callback' );
-});
-// var id = setTimeout(function(){
-//     a.cancel();
-// }, 9000);
