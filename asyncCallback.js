@@ -36,3 +36,17 @@ _.extend(AsyncCallback.prototype, {
     this._bind(func)();
   }
 });
+
+// test
+var b = {
+  _name: 'le hoang'
+};
+var t = new AsyncCallback();
+t.run(function(){
+  console.log('hello', this._name);
+});
+t.run(function(){
+  console.log('hello du ma', this._name);
+});
+t.setInstance(b);
+t.runLastWaitList();
