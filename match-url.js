@@ -29,7 +29,12 @@ function isNull(obj) {
 function isUndefined (obj) {
     return obj === void 0;
 };
+function isString (obj) {
+    return Object.prototype.toString.call(obj) === '[object String]';
+};
 function getQueryVariable(query) {
+    if(!isString(query))
+        return {};
     var vars = query.split("&");
     var result = {};
     for (var i = 0; i < vars.length; i++) {
