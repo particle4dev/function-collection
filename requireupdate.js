@@ -4,11 +4,13 @@ RequireUpdate = function(callback){
         callback.apply(null, args);
         willUpdate = false;
     };
-    this.run = function(){
+    this.run = function(number){
+        if(_.isUndefined(number) || _.isNull(number))
+            number = 0;
         if (! willUpdate) {
             var args = Array.prototype.slice.call(arguments);
             var c = cb.bind(this, args);
-            setTimeout(c, 0);
+            setTimeout(c, number);
             willUpdate = true;
         }
     };
